@@ -17,7 +17,6 @@ l'entraînement.
 |---|---|
 | `TP_UNet_Segmentation.ipynb` | Notebook du TP à exécuter sur Kaggle (Run All). |
 | `QUESTIONS_TP.pdf` | Questions de réflexion et consignes du livrable. |
-| `QUESTIONS_TP.tex` | Source LaTeX du PDF. |
 
 ## Comment exécuter (Kaggle)
 
@@ -37,9 +36,3 @@ l'entraînement.
 Un PDF unique `TP_GT0XX_NomPrenom.pdf` contenant les 6 captures d'écran,
 les réponses aux 5 questions (Q1–Q5) et la figure de prédictions.
 Barème : voir `QUESTIONS_TP.pdf` (sur 20 points).
-
-## Régénérer le PDF des questions
-
-```bash
-xelatex QUESTIONS_TP.tex
-```
