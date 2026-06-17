@@ -1,0 +1,215 @@
+\documentclass[12pt,a4paper]{article}
+
+% ── Packages ──────────────────────────────────────────────
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{microtype}
+
+% ── Colors ────────────────────────────────────────────────
+\definecolor{primary}{RGB}{26, 86, 219}
+\definecolor{accent}{RGB}{5, 150, 105}
+\definecolor{warning}{RGB}{217, 119, 6}
+\definecolor{gray}{RGB}{107, 114, 128}
+\definecolor{lightgray}{RGB}{243, 244, 246}
+
+\hypersetup{colorlinks=true, linkcolor=primary, urlcolor=primary, citecolor=primary}
+
+% ── Section styling ───────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\color{primary}}
+  {\thesection.}{0.6em}{}
+  [\color{primary}\titlerule]
+
+% ── Custom boxes ──────────────────────────────────────────
+\tcbuselibrary{skins, breakable}
+
+\newtcolorbox{infobox}[1][]{
+  enhanced, breakable,
+  colback=primary!8, colframe=primary,
+  fonttitle=\bfseries, title={Info\quad #1},
+  left=6pt, right=6pt, top=4pt, bottom=4pt, boxrule=1pt
+}
+
+\newtcolorbox{warningbox}[1][]{
+  enhanced, breakable,
+  colback=warning!10, colframe=warning,
+  fonttitle=\bfseries, title={Attention\quad #1},
+  left=6pt, right=6pt, top=4pt, bottom=4pt, boxrule=1pt
+}
+
+\newtcolorbox{questionbox}{
+  enhanced, breakable,
+  colback=accent!8, colframe=accent,
+  left=6pt, right=6pt, top=4pt, bottom=4pt, boxrule=1pt
+}
+
+% ── Header / Footer ───────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray} TP -- Segmentation d'Images Satellites avec U-Net}
+\fancyhead[R]{\small\color{gray} Systemes Repartis \& GPU}
+\fancyfoot[C]{\small\color{gray} \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+
+% ── Title page ────────────────────────────────────────────
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+
+  {\color{primary}\rule{\linewidth}{2pt}}
+  \vspace{0.5cm}
+
+  {\Huge\bfseries Questions du TP}\\[0.4cm]
+  {\LARGE\bfseries\color{primary} Segmentation d'Images Satellites\\avec U-Net}
+
+  \vspace{0.5cm}
+  {\color{primary}\rule{\linewidth}{2pt}}
+
+  \vspace{1.5cm}
+
+  {\large
+    \begin{tabular}{rl}
+      \textbf{Module}       & Systemes Repartis et Programmation Parallele \\[4pt]
+      \textbf{Filiere}      & Master S2 -- Intelligence Artificielle \\[4pt]
+      \textbf{Universite}   & Faculte des Sciences Ben M'sick \\[4pt]
+      \textbf{Groupe}       & GT019 \\[4pt]
+      \textbf{Presentateurs}& Anass Dabibe \quad Hassan El Hadi \quad Marouane Ait Tamanait \\
+    \end{tabular}
+  }
+
+  \vspace{2cm}
+
+  \begin{tcolorbox}[colback=primary!5, colframe=primary, width=0.85\linewidth,
+    boxrule=1pt, left=10pt, right=10pt, top=8pt, bottom=8pt]
+    \centering
+    \textbf{Consigne} \\[6pt]
+    Executez le notebook \texttt{TP\_UNet\_Segmentation.ipynb} sur Kaggle (GPU),
+    realisez les 6 captures d'ecran demandees, puis repondez aux 5 questions
+    de reflexion ci-dessous dans un rapport PDF.
+  \end{tcolorbox}
+
+  \vfill
+  {\color{gray}\small Annee universitaire 2025--2026}
+\end{titlepage}
+
+% ══════════════════════════════════════════════════════════
+\section{Captures d'ecran a realiser}
+
+Au fil de l'execution du notebook, realisez les \textbf{6 captures d'ecran}
+suivantes (reperees par l'icone appareil photo dans le notebook) :
+
+\begin{center}
+\begin{tabular}{cll}
+  \toprule
+  \textbf{\#} & \textbf{Section du notebook} & \textbf{Contenu a capturer} \\
+  \midrule
+  1 & 1 -- Dataset            & Grille 4 images / 4 masques \\
+  2 & 3 -- Entrainement       & Premieres et dernieres epoques (Loss, IoU) \\
+  3 & 4 -- Courbes            & Courbes de Loss et d'IoU \\
+  4 & 5 -- Evaluation         & Tableau d'IoU par classe \\
+  5 & 6 -- Visualisation      & Figure de predictions (4 x 3) \\
+  6 & 7 -- Benchmark          & Resultat CPU vs GPU et acceleration \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{infobox}
+  Chaque capture doit etre accompagnee d'une breve description (2--3 phrases)
+  expliquant ce que l'on observe.
+\end{infobox}
+
+% ══════════════════════════════════════════════════════════
+\section{Questions de reflexion}
+
+Repondez de maniere argumentee a chacune des questions suivantes.
+
+\begin{questionbox}
+  \begin{enumerate}[leftmargin=*, label=\textbf{Q\arabic*.}, itemsep=12pt]
+
+    \item \textbf{Architecture} \\
+          Pourquoi U-Net utilise-t-il des \textit{skip connections} ?
+          Que se passerait-il si on les supprimait ?
+
+    \item \textbf{Metrique} \\
+          Pourquoi utilise-t-on l'IoU (\textit{Intersection over Union})
+          plutot que l'accuracy pour evaluer la segmentation ?
+
+    \item \textbf{Parallelisme} \\
+          Quelle est la difference entre \texttt{DataParallel} et
+          \texttt{DistributedDataParallel} (DDP) dans PyTorch ?
+          Lequel est plus efficace et pourquoi ?
+
+    \item \textbf{Resultats} \\
+          Quelle classe obtient le meilleur IoU dans vos resultats ?
+          Proposez une explication basee sur les caracteristiques
+          visuelles de cette classe dans les images.
+
+    \item \textbf{GPU} \\
+          D'apres votre benchmark, quel est le facteur d'acceleration
+          GPU obtenu ? Comment ce resultat justifie-t-il l'utilisation
+          des systemes repartis pour l'entrainement de modeles de
+          deep learning ?
+
+  \end{enumerate}
+\end{questionbox}
+
+% ══════════════════════════════════════════════════════════
+\section{Livrable attendu}
+
+\begin{warningbox}[A deposer sur Google Classroom]
+  Un fichier \textbf{PDF unique} nomme \texttt{TP\_GT0XX\_NomPrenom.pdf}.
+\end{warningbox}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}, itemsep=4pt]
+  \item Les \textbf{6 captures d'ecran} demandees, chacune accompagnee
+        d'une breve description (2--3 phrases).
+  \item Les \textbf{reponses} aux 5 questions de reflexion (Q1 a Q5).
+  \item La figure \textbf{predictions} en grand format
+        (image satellite $|$ verite terrain $|$ prediction U-Net).
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{center}
+  \begin{tabular}{lc}
+    \toprule
+    \textbf{Element}                & \textbf{Points} \\
+    \midrule
+    Captures d'ecran (6 x 1 pt)     & 6  \\
+    Questions Q1--Q5 (5 x 2 pts)    & 10 \\
+    Qualite de la redaction         & 4  \\
+    \midrule
+    \textbf{Total}                  & \textbf{20} \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+% ══════════════════════════════════════════════════════════
+\section{Ressources}
+
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+  \item \textbf{Paper U-Net} : \url{https://arxiv.org/abs/1505.04597}
+  \item \textbf{Dataset Kaggle} :
+        \url{https://www.kaggle.com/datasets/humansintheloop/semantic-segmentation-of-aerial-imagery}
+  \item \textbf{PyTorch DataParallel} :
+        \url{https://pytorch.org/docs/stable/generated/torch.nn.DataParallel.html}
+  \item \textbf{PyTorch DDP tutorial} :
+        \url{https://pytorch.org/tutorials/intermediate/ddp_tutorial.html}
+\end{itemize}
+
+\vfill
+\begin{center}
+  \color{gray}\small
+  Bon courage ! --- Groupe GT019 --- Systemes Repartis \& GPU 2025--2026
+\end{center}
+
+\end{document}
