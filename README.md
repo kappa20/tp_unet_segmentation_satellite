@@ -48,7 +48,6 @@ Le modèle est un **U-Net** classique (~7,6 M de paramètres) :
 ```
 tp_unet_segmentation_satellite/
 ├── TP_UNet_Segmentation.ipynb   # Notebook principal (à exécuter sur Kaggle)
-├── GUIDE_TP.md                  # Guide étudiant : consignes, captures, questions
 └── README.md                    # Ce fichier
 ```
 
@@ -56,9 +55,7 @@ tp_unet_segmentation_satellite/
 
 ## Lancer le TP
 
-Le notebook est conçu pour être exécuté sur **Kaggle** (GPU T4 gratuit). Consultez [`GUIDE_TP.md`](GUIDE_TP.md) pour les instructions complètes de mise en place.
-
-En résumé :
+Le notebook est conçu pour être exécuté sur **Kaggle** (GPU T4 gratuit) :
 
 ```bash
 git clone https://github.com/kappa20/tp_unet_segmentation_satellite.git
